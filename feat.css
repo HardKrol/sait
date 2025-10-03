@@ -1,10 +1,10 @@
 body {
 	margin: 0;
+	padding: 20px 0;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background: url('./images/back3.jpg') no-repeat center center fixed;
 	background-size: cover;
 	color: #f0f0f0;
-	padding: 20px;
 	box-sizing: border-box;
 }
 
