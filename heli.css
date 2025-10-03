@@ -62,7 +62,7 @@ body {
 }
 
 .image_container {
-	width: calc(50% - 20px);
+	width: 100%;
 	background: #222;
 	border-radius: 15px;
 	overflow: hidden;
@@ -73,6 +73,18 @@ body {
 	width: 100%;
 	height: auto;
 	display: block;
+	cursor: none;
+}
+
+/* Добавим стиль для иконки вертолёта */
+#heli-cursor {
+	position: fixed;
+	pointer-events: none;
+	width: 75px;
+	height: 75px;
+	transform: translate(-40%, -40%);
+	display: none;
+	z-index: 10000;
 }
 
 /* Адаптивность */

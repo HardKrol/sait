@@ -36,6 +36,32 @@
 			</figure>
 		</div>
 	</div>
+
+	<img id="heli-cursor" src="./images/heli/heli.png" alt="heli cursor" />
+	
+	<script>
+		const heliCursor = document.getElementById('heli-cursor');
+		const images = document.querySelectorAll('.image-gallery img');
+
+		images.forEach(img => {
+			img.addEventListener('mouseenter', () => {
+				heliCursor.style.display = 'block';
+			});
+
+			img.addEventListener('mouseleave', () => {
+				heliCursor.style.display = 'none';
+			});
+		});
+
+		document.addEventListener('mousemove', (event) => {
+			if (heliCursor.style.display === 'block') {
+				heliCursor.style.left = event.clientX + 'px';
+				heliCursor.style.top = event.clientY + 'px';
+			}
+		});
+	</script>
+
+
 </body>
 
 </html>
