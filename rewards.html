@@ -47,66 +47,118 @@
 	<script>
 		let currentDroppable = null;
 
-		function makeDraggable(elem, descriptShow, descriptHide, otherElemShadowOff) {
-			elem.onmousedown = function (event) {
-				let shiftX = event.clientX - elem.getBoundingClientRect().left;
-				let shiftY = event.clientY - elem.getBoundingClientRect().top;
-				elem.style.position = 'absolute';
-				elem.style.zIndex = 1000;
-				document.body.append(elem);
-				moveAt(event.pageX, event.pageY);
+      function makeDraggable(elem, descriptShow, descriptHide, otherElemShadowOff) {
+         let shiftX, shiftY;
 
-				function moveAt(pageX, pageY) {
-					elem.style.left = pageX - shiftX + 'px';
-					elem.style.top = pageY - shiftY + 'px';
-				}
+         function moveAt(pageX, pageY) {
+            elem.style.left = pageX - shiftX + 'px';
+            elem.style.top = pageY - shiftY + 'px';
+         }
 
-				function onMouseMove(event) {
-					moveAt(event.pageX, event.pageY);
-					elem.hidden = true;
-					let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-					elem.hidden = false;
-					if (!elemBelow) return;
-					let droppableBelow = elemBelow.closest('.droppable');
-					if (currentDroppable != droppableBelow) {
-						if (currentDroppable) {
-							elem.style.boxShadow = ""; 
-							descriptHide.style.display = "none";
-						}
-						currentDroppable = droppableBelow;
-						if (currentDroppable) {
-						}
-					}
-				}
+         function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+            elem.hidden = true;
+            let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+            elem.hidden = false;
+            if (!elemBelow) return;
+            let droppableBelow = elemBelow.closest('.droppable');
+            if (currentDroppable != droppableBelow) {
+               if (currentDroppable) {
+                  elem.style.boxShadow = "";
+                  descriptHide.style.display = "none";
+               }
+               currentDroppable = droppableBelow;
+            }
+         }
 
-				document.addEventListener('mousemove', onMouseMove);
+         function onTouchMove(event) {
+            if (event.touches.length == 1) {
+               let touch = event.touches[0];
+               moveAt(touch.pageX, touch.pageY);
+               elem.hidden = true;
+               let elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+               elem.hidden = false;
+               if (!elemBelow) return;
+               let droppableBelow = elemBelow.closest('.droppable');
+               if (currentDroppable != droppableBelow) {
+                  if (currentDroppable) {
+                     elem.style.boxShadow = "";
+                     descriptHide.style.display = "none";
+                  }
+                  currentDroppable = droppableBelow;
+               }
+            }
+            event.preventDefault();
+         }
 
-				elem.onmouseup = function () {
-					if (currentDroppable) {
-						descriptShow.style.display = "flex";
-						descriptHide.style.display = "none";
-						otherElemShadowOff.style.boxShadow = "0 0 0px #ff0000";
-					} else {
-						descriptShow.style.display = "none";
-					}
-					document.removeEventListener('mousemove', onMouseMove);
-					elem.onmouseup = null;
-				};
-			};
+         elem.onmousedown = function (event) {
+            shiftX = event.clientX - elem.getBoundingClientRect().left;
+            shiftY = event.clientY - elem.getBoundingClientRect().top;
+            elem.style.position = 'absolute';
+            elem.style.zIndex = 1000;
+            document.body.append(elem);
+            moveAt(event.pageX, event.pageY);
 
-			elem.ondragstart = function () {
-				return false;
-			};
-		}
+            document.addEventListener('mousemove', onMouseMove);
 
-		const reward1 = document.getElementById('reward1');
-		const reward2 = document.getElementById('reward2');
-		const descript1 = document.getElementById('descript1');
-		const descript2 = document.getElementById('descript2');
+            elem.onmouseup = function () {
+               if (currentDroppable) {
+                  descriptShow.style.display = "flex";
+                  descriptHide.style.display = "none";
+                  otherElemShadowOff.style.boxShadow = "0 0 0px #ff0000";
+               } else {
+                  descriptShow.style.display = "none";
+               }
+               document.removeEventListener('mousemove', onMouseMove);
+               elem.onmouseup = null;
+            };
 
-		makeDraggable(reward1, descript1, descript2, reward2);
-		makeDraggable(reward2, descript2, descript1, reward1);
-	</script>
+            elem.ondragstart = function () {
+               return false;
+            };
+         };
+
+         elem.ontouchstart = function (event) {
+            if (event.touches.length == 1) {
+               let touch = event.touches[0];
+               shiftX = touch.clientX - elem.getBoundingClientRect().left;
+               shiftY = touch.clientY - elem.getBoundingClientRect().top;
+               elem.style.position = 'absolute';
+               elem.style.zIndex = 1000;
+               document.body.append(elem);
+               moveAt(touch.pageX, touch.pageY);
+            }
+            event.preventDefault();
+         };
+
+         elem.ontouchmove = function (event) {
+            onTouchMove(event);
+         };
+
+         elem.ontouchend = function () {
+            if (currentDroppable) {
+               descriptShow.style.display = "flex";
+               descriptHide.style.display = "none";
+               otherElemShadowOff.style.boxShadow = "0 0 0px #ff0000";
+            } else {
+               descriptShow.style.display = "none";
+            }
+            currentDroppable = null;
+         };
+
+         elem.ondragstart = function () {
+            return false;
+         };
+      }
+
+      const reward1 = document.getElementById('reward1');
+      const reward2 = document.getElementById('reward2');
+      const descript1 = document.getElementById('descript1');
+      const descript2 = document.getElementById('descript2');
+
+      makeDraggable(reward1, descript1, descript2, reward2);
+      makeDraggable(reward2, descript2, descript1, reward1);
+   </script>
 </body>
 
 </html>
