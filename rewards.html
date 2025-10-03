@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Награды</title>
+	<link href="./rewards.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div class="page-wrapper">
+		<div class="heading">Онлайн-Музей Завитухина А. А.</div>
+		<nav class="chapters">
+			<button class="chap_button" onclick="location.href='./index.html'">Главная</button>
+			<button class="chap_button" onclick="location.href='./bio.html'">Биография</button>
+			<button class="chap_button" onclick="location.href='./rewards.html'">Награды</button>
+			<button class="chap_button" onclick="location.href='./heli.html'">Прогулка на вертолёте</button>
+			<button class="chap_button" onclick="location.href='./photo.html'">Фото</button>
+			<button class="chap_button" onclick="location.href='./herit.html'">Подвиг</button>
+			<button class="chap_button" onclick="location.href='./feat.html'">С места подвига</button>
+		</nav>
+
+		<div class="main_text">
+			<p>Повесьте медали на стену</p>
+		</div>
+
+		<div class="drag-area droppable">
+			<img src="./images/rewards/stand.jpg" id="stand" alt="Стойка для наград">
+		</div>
+		<div class="draggables">
+			<img src="./images/rewards/hero.png" width="10%" id="reward1" alt="Медаль Героя России" class="draggable">
+			<img src="./images/rewards/orden.png" width="10%" id="reward2" alt="Орден Мужества" class="draggable">
+		</div>
+
+		<p id="descript1" class="descr" style="display:none;">
+			Указом Президента РФ № 1285 от 11.07.2000 г. за мужество и героизм, проявленные при исполнении воинского долга в
+			Северо-Кавказском регионе, майору А. А. Завитухину и капитану А. Ю. Кириллину присвоено звание Героев России
+			(посмертно). «Золотую Звезду» Героя России из рук командующего получил сын майора А. А. Завитухина — Никита.
+		</p>
+		<p id="descript2" class="descr" style="display:none;">
+			На вертолёте Ми-24 экипаж Андрея Завитухина совершил 214 боевых вылетов (69 часов налёта), в ходе которых уничтожил 1
+			БТР, 4 опорных пункта, 26 огневых точек, 5 миномётных расчётов, 130 единиц живой силы противника. В результате чего А.
+			А. Завитухин получил звание Кавалера ордена Мужества.
+		</p>
+	</div>
+
+	<script>
+		let currentDroppable = null;
+
+		function makeDraggable(elem, descriptShow, descriptHide, otherElemShadowOff) {
+			elem.onmousedown = function (event) {
+				let shiftX = event.clientX - elem.getBoundingClientRect().left;
+				let shiftY = event.clientY - elem.getBoundingClientRect().top;
+				elem.style.position = 'absolute';
+				elem.style.zIndex = 1000;
+				document.body.append(elem);
+				moveAt(event.pageX, event.pageY);
+
+				function moveAt(pageX, pageY) {
+					elem.style.left = pageX - shiftX + 'px';
+					elem.style.top = pageY - shiftY + 'px';
+				}
+
+				function onMouseMove(event) {
+					moveAt(event.pageX, event.pageY);
+					elem.hidden = true;
+					let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+					elem.hidden = false;
+					if (!elemBelow) return;
+					let droppableBelow = elemBelow.closest('.droppable');
+					if (currentDroppable != droppableBelow) {
+						if (currentDroppable) {
+							elem.style.boxShadow = ""; 
+							descriptHide.style.display = "none";
+						}
+						currentDroppable = droppableBelow;
+						if (currentDroppable) {
+						}
+					}
+				}
+
+				document.addEventListener('mousemove', onMouseMove);
+
+				elem.onmouseup = function () {
+					if (currentDroppable) {
+						descriptShow.style.display = "flex";
+						descriptHide.style.display = "none";
+						otherElemShadowOff.style.boxShadow = "0 0 0px #ff0000";
+					} else {
+						descriptShow.style.display = "none";
+					}
+					document.removeEventListener('mousemove', onMouseMove);
+					elem.onmouseup = null;
+				};
+			};
+
+			elem.ondragstart = function () {
+				return false;
+			};
+		}
+
+		const reward1 = document.getElementById('reward1');
+		const reward2 = document.getElementById('reward2');
+		const descript1 = document.getElementById('descript1');
+		const descript2 = document.getElementById('descript2');
+
+		makeDraggable(reward1, descript1, descript2, reward2);
+		makeDraggable(reward2, descript2, descript1, reward1);
+	</script>
+</body>
+
+</html>

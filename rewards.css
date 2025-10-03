@@ -1,0 +1,136 @@
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: url('./images/back3.jpg') no-repeat center center fixed;
+	background-size: cover;
+	color: #f0f0f0;
+}
+
+.page-wrapper {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+}
+
+.heading {
+	font-size: 2.8em;
+	text-align: center;
+	margin-bottom: 15px;
+	font-weight: bold;
+	color: #ffdb4d;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.chapters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	/* расстояние между кнопками */
+	flex-wrap: nowrap;
+	/* запретить перенос на новую строку */
+	margin-bottom: 20px;
+}
+
+.chap_button {
+	/* сохранение существующих стилей */
+	background-color: #444;
+	border: none;
+	color: #fff;
+	padding: 10px 18px;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 6px;
+	transition: background-color 0.3s, color 0.3s;
+	white-space: nowrap;
+	/* запретить перенос текста на кнопке */
+}
+
+.chap_button:hover {
+	background-color: #ffdb4d;
+	color: #000;
+}
+
+.main_text {
+	font-size: 1.2em;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+/* Область с держателем наград */
+.drag-area {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.drag-area img {
+	max-width: 100%;
+	max-height: 350px;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+}
+
+a img {
+	border: none;
+	outline: none;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+	/* Оставить тень, если нужно */
+}
+
+/* Наградные изображения уменьшены, убрана обводка */
+.draggables {
+	display: flex;
+	gap: 25px;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.draggable {
+	border: none;
+	outline: none;
+	cursor: grab;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+	transition: transform 0.25s ease;
+	width: 7%;
+	height: auto;
+}
+
+.descr {
+	max-width: 700px;
+	margin: 0 auto 20px;
+	background: rgba(255, 219, 77, 0.1);
+	padding: 15px 20px;
+	border-radius: 8px;
+	display: none;
+	font-size: 1em;
+	color: #fff;
+}
+
+#stand {
+	width: 500px;
+	height: auto;
+	display: block;
+	margin: 0 auto 20px;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Зона с текстом дескриптов */
+#descript1,
+#descript2 {
+	max-width: 850px;
+	/* увеличена ширина */
+	margin: 15px auto 30px;
+	padding: 25px 30px;
+	/* увеличенный внутренний отступ */
+	background: rgba(255, 219, 77, 0.15);
+	border-radius: 12px;
+	font-size: 1.18em;
+	line-height: 1.6;
+	color: #fff;
+	display: none;
+	word-wrap: break-word;
+}

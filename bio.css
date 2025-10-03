@@ -1,0 +1,188 @@
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: url('./images/back3.jpg') no-repeat center center fixed;
+	background-size: cover;
+	color: #f0f0f0;
+}
+
+.page-wrapper {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+}
+
+.heading {
+	font-size: 2.8em;
+	font-weight: bold;
+	color: #ffdb4d;
+	text-align: center;
+	margin-bottom: 15px;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.chapters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	flex-wrap: nowrap;
+	margin-bottom: 20px;
+}
+
+.chap_button {
+	background-color: #444;
+	border: none;
+	color: #fff;
+	padding: 10px 18px;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 6px;
+	transition: background-color 0.3s, color 0.3s;
+	white-space: nowrap;
+}
+
+.chap_button:hover {
+	background-color: #ffdb4d;
+	color: #000;
+}
+
+.head2 {
+	font-size: 1.8em;
+	font-weight: bold;
+	color: #ffdb4d;
+	margin-top: 30px;
+	margin-bottom: 15px;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.head3 {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: #ffdb4d;
+	margin-top: 25px;
+	margin-bottom: 12px;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.collage-wrapper {
+	background-color: rgba(30, 30, 30, 0.85);
+	border-radius: 12px;
+	padding: 25px;
+	margin-bottom: 50px;
+	max-width: 940px;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 0 0 25px rgba(255, 219, 77, 0.3);
+}
+
+.collage-wrapper h2 {
+	color: #ffdb4d;
+	margin-bottom: 20px;
+	font-weight: 700;
+	font-size: 1.8em;
+	text-shadow: 1px 1px 3px #000;
+}
+
+/* Общие стили для коллажей */
+.collage {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 30px;
+	align-items: stretch;
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.left-large {
+	flex-basis: 60%;
+	border: 2px solid black;
+	height: 628px;
+	background: #222;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.right-blocks {
+	flex-basis: 40%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: stretch;
+}
+
+.right-blocks .block {
+	flex: 1 1 0;
+	border: 2px solid black;
+	background: #222;
+	border-radius: 12px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Для второго типа коллажа (3), где справа 2 фото в столбец */
+
+.collage-3 .right-blocks .block {
+	height: 314px;
+	border: 2px solid black;
+	background: #222;
+	border-radius: 12px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.collage img {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	transition: transform 0.3s;
+}
+
+.collage img:hover {
+	transform: scale(1.05);
+}
+
+/* Коллаж 2 - 2 фото рядом, адаптивно */
+.collage2 {
+	grid-template-columns: 1fr 1fr;
+	height: auto;
+}
+
+.main_text {
+	font-size: 1.1em;
+	line-height: 1.5;
+	color: #f0f0f0;
+	text-align: justify;
+	padding: 0 15px 15px 15px;
+}
+
+a {
+	color: #ffdb4d;
+	/* яркий жёлтый цвет, сочетающийся с заголовками */
+	text-decoration: none;
+	/* убрать стандартное подчеркивание */
+	font-weight: 600;
+	/* немного жирнее для акцента */
+	transition: color 0.3s, text-decoration 0.3s;
+}
+
+a:hover,
+a:focus {
+	color: #fff;
+	text-decoration: underline;
+	/* подчеркнуть при наведении */
+	outline: none;
+}
+
+a:active {
+	color: #ccc;
+}

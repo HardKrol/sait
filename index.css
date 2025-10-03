@@ -1,0 +1,83 @@
+/* Фоновое изображение на всю страницу */
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: url('./images/back3.jpg') no-repeat center center fixed;
+	background-size: cover;
+	color: #f0f0f0;
+}
+
+/* Центр контейнера, ограничение по ширине */
+.page-wrapper {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	/* затемнённый фон для читаемости */
+	border-radius: 10px;
+}
+
+/* Заголовок */
+.heading {
+	font-size: 2.8em;
+	text-align: center;
+	margin-bottom: 15px;
+	font-weight: bold;
+	color: #ffdb4d;
+	text-shadow: 1px 1px 3px #000;
+}
+
+/* Меню */
+.chapters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	/* расстояние между кнопками */
+	flex-wrap: nowrap;
+	/* запретить перенос на новую строку */
+	margin-bottom: 20px;
+}
+
+.chap_button {
+	/* сохранение существующих стилей */
+	background-color: #444;
+	border: none;
+	color: #fff;
+	padding: 10px 18px;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 6px;
+	transition: background-color 0.3s, color 0.3s;
+	white-space: nowrap;
+	/* запретить перенос текста на кнопке */
+}
+
+.chap_button:hover {
+	background-color: #ffdb4d;
+	color: #000;
+}
+
+/* Фото - адаптивное с плавным масштабированием */
+.image_container {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.main_photo {
+	max-width: 80%;
+	/* увеличено с 100% до 80% от контейнера */
+	height: 600px;
+	border-radius: 15px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+	display: block;
+	margin: 0 auto;
+}
+
+
+/* Основной текст */
+.main_text {
+	font-size: 1.1em;
+	line-height: 1.5;
+	padding: 0 15px;
+	text-align: center;
+}
