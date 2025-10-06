@@ -68,32 +68,13 @@ body {
 	text-shadow: 1px 1px 3px #000;
 }
 
-.collage-wrapper {
-	background-color: rgba(30, 30, 30, 0.85);
-	border-radius: 12px;
-	padding: 25px;
-	margin-bottom: 50px;
-	max-width: 940px;
-	margin-left: auto;
-	margin-right: auto;
-	box-shadow: 0 0 25px rgba(255, 219, 77, 0.3);
-}
-
-.collage-wrapper h2 {
-	color: #ffdb4d;
-	margin-bottom: 20px;
-	font-weight: 700;
-	font-size: 1.8em;
-	text-shadow: 1px 1px 3px #000;
-}
-
 /* Общие стили для коллажей */
 .collage {
 	display: flex;
 	gap: 10px;
 	margin-bottom: 30px;
 	align-items: stretch;
-	max-width: 900px;
+	max-width: 780px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -118,6 +99,14 @@ body {
 	justify-content: stretch;
 }
 
+.du-blocks {
+	flex-basis: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: stretch;
+}
+
 .right-blocks .block {
 	flex: 1 1 0;
 	border: 2px solid black;
@@ -129,32 +118,38 @@ body {
 	justify-content: center;
 }
 
-/* Коллаж 2 - 2 фото рядом, адаптивно */
-.collage2 {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: auto auto;
-	gap: 8px;
-	width: 100%;
+.du-blocks .top-row,
+.du-blocks .bottom-row {
+	display: flex;
+	gap: 10px;
 }
 
-.collage2 img {
-	width: 100%;
-	height: auto;
-	object-fit: cover;
+/* Три высоких блока сверху */
+.du-blocks .top-row .block {
+	flex: 1 1 0;
+	border: 2px solid black;
+	background: #222;
+	border-radius: 12px;
+	overflow: hidden;
+	height: 360px;
+	/* Высота для высоких картинок */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.collage2 img:nth-child(4),
-.collage2 img:nth-child(5) {
-	grid-column: 1 / 4;
-	width: 50%;
-	float: left;
-	box-sizing: border-box;
-	padding-right: 8px;
-}
-
-.collage2 img:nth-child(5) {
-	padding-right: 0;
+/* Два широких блока снизу */
+.du-blocks .bottom-row .block {
+	flex: 1 1 0;
+	border: 2px solid black;
+	background: #222;
+	border-radius: 12px;
+	overflow: hidden;
+	height: 210px;
+	/* Меньшая высота для широких */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .main_text {
