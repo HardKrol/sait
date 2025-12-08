@@ -54,10 +54,13 @@ body {
 	color: #000;
 }
 
-.main_text {
-	font-size: 1.2em;
+.collage-title {
+	color: #ffdb4d;
+	font-weight: 700;
+	font-size: 1.6em;
 	margin-bottom: 20px;
 	text-align: center;
+	text-shadow: 1px 1px 3px #000;
 }
 
 /* Область с держателем наград */
@@ -81,23 +84,39 @@ a img {
 	/* Оставить тень, если нужно */
 }
 
-/* Наградные изображения уменьшены, убрана обводка */
-.draggables {
+/* Контейнер для всех трех элементов в одну линию */
+.draggables-container {
 	display: flex;
-	gap: 25px;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 20px;
+	width: 100%;
+}
+
+.draggables1,
+.draggables2 {
+	width: 25%;
+	/* Фиксированная ширина для контейнеров с наградами */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.drag-area {
+	width: 50%;
+	/* Широкая область для стойки */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .draggable {
-	border: none;
-	outline: none;
-	cursor: grab;
-	border-radius: 10px;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-	transition: transform 0.25s ease;
-	width: 7%;
+	width: 100%;
+	/* Занимает всю ширину родительского контейнера */
+	max-width: 120px;
 	height: auto;
+	/* Сохраняет квадратную форму */
+	/* остальные стили */
 }
 
 .descr {
