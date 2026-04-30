@@ -3,8 +3,9 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Биография</title>
-	<link href="./bio.css" rel="stylesheet" type="text/css">
+	<link href="./styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -18,6 +19,7 @@
 			<button class="chap_button" onclick="location.href='./herit.html'">Подвиг</button>
 			<button class="chap_button" onclick="location.href='./rewards.html'">Награды</button>
 			<button class="chap_button" onclick="location.href='./feat.html'">Полётный планшет</button>
+			<button class="chap_button" onclick="location.href='./author.html'">Об авторе</button>
 		</div>
 
 		<div class="head2">Детство. Юношество.</div>
@@ -43,26 +45,23 @@
 		<div class="collage collage-1">
 			<div class="left-large">
 				<a href="./images/bio/gram1.pdf" target="_blank" rel="noopener">
-					<img src="./images/bio/gram1.jpg" alt="Грамота 1" style="width:100%; height:100%; object-fit:contain;">
+					<img src="./images/bio/gram1.jpg" alt="Грамота 1">
 				</a>
 			</div>
 			<div class="right-blocks">
 				<div class="block">
 					<a href="./images/bio/gram2.pdf" target="_blank" rel="noopener">
-						<img src="./images/bio/gram2.jpg" alt="Грамота 2"
-							style="width:100%; height:100%; object-fit:contain;">
+						<img src="./images/bio/gram2.jpg" alt="Грамота 2">
 					</a>
 				</div>
 				<div class="block">
 					<a href="./images/bio/gram3.pdf" target="_blank" rel="noopener">
-						<img src="./images/bio/gram3.jpg" alt="Грамота 3"
-							style="width:100%; height:100%; object-fit:contain;">
+						<img src="./images/bio/gram3.jpg" alt="Грамота 3">
 					</a>
 				</div>
 				<div class="block">
 					<a href="./images/bio/gram4.pdf" target="_blank" rel="noopener">
-						<img src="./images/bio/gram4.jpg" alt="Грамота 4"
-							style="width:100%; height:100%; object-fit:contain;">
+						<img src="./images/bio/gram4.jpg" alt="Грамота 4">
 					</a>
 				</div>
 			</div>
@@ -79,39 +78,34 @@
 		</div>
 
 		<div class="head3">Грамоты</div>
-		<div class="collage">
+		<div class="collage collage-2">
 			<div class="du-blocks">
 				<div class="top-row">
 					<div class="block">
 						<a href="./images/bio/gram5.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram5.jpg" alt="Грамота 5"
-								style="width:100%; height:100%; object-fit:contain;">
+							<img src="./images/bio/gram5.jpg" alt="Грамота 5">
 						</a>
 					</div>
 					<div class="block">
 						<a href="./images/bio/gram6.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram6.jpg" alt="Грамота 6"
-								style="width:100%; height:100%; object-fit:contain;">
+							<img src="./images/bio/gram6.jpg" alt="Грамота 6">
 						</a>
 					</div>
 					<div class="block">
 						<a href="./images/bio/gram7.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram7.jpg" alt="Грамота 7"
-								style="width:100%; height:100%; object-fit:contain;">
+							<img src="./images/bio/gram7.jpg" alt="Грамота 7">
 						</a>
 					</div>
 				</div>
 				<div class="bottom-row">
 					<div class="block">
 						<a href="./images/bio/gram8.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram8.jpg" alt="Грамота 8"
-								style="width:100%; height:100%; object-fit:contain;">
+							<img src="./images/bio/gram8.jpg" alt="Грамота 8">
 						</a>
 					</div>
 					<div class="block">
 						<a href="./images/bio/gram9.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram9.jpg" alt="Грамота 9"
-								style="width:100%; height:100%; object-fit:contain;">
+							<img src="./images/bio/gram9.jpg" alt="Грамота 9">
 						</a>
 					</div>
 				</div>
@@ -159,11 +153,177 @@
 				не умирают...</a><br>
 			<a href="https://ru.ruwiki.ru/wiki/Завитухин%2C_Андрей_Анатольевич">Биография военного</a><br>
 			<a href="https://ru.wikipedia.org/wiki/Завитухин,_Андрей_Анатольевич">Завитухин, Андрей Анатольевич</a><br>
-			<a href="https://vk.com/@vologdacon-geroi-rossii-andrei-zavituhin?ysclid=mafpga7shm290496524">Герой России
-				Андрей Завитухин</a><br>
+			<a href="https://vk.com/@vologdacon-geroi-rossii-andrei-zavituhin?ysclid=mafpga7shm290496524">Герой России Андрей Завитухин</a><br>
 			<a href="https://ok.ru/stengazeta/topic/155042857178016">СтеНГазета (Военная история)</a>
 		</div>
+		<div class="page-navigation">
+			<button class="nav-button" onclick="location.href='./index.html'">← Назад</button>
+			<button class="nav-button" onclick="location.href='./photo.html'">Далее →</button>
+		</div>
 	</div>
+	<div class="site-footer">
+		<p>Счётчик посещений: <strong id="visitor-count">0</strong> | <a href="./author.html">Об авторе сайта</a></p>
+	</div>
+
+	<!-- Лайтбокс для карусели -->
+	<div id="lightbox" class="lightbox">
+		<div class="lightbox-content">
+			<div class="lightbox-header">
+				<div class="lightbox-counter">
+					<span id="image-counter">1 / 1</span>
+				</div>
+				<div class="lightbox-tools">
+					<button class="lightbox-tool-btn" onclick="zoomIn()" title="Приблизить">🔍</button>
+				</div>
+			</div>
+
+			<div class="lightbox-image-wrapper">
+				<button class="lightbox-nav prev" id="prev-btn" onclick="prevImage()" title="Предыдущее">‹</button>
+				<img id="lightbox-image" class="lightbox-image" src="" alt="Увеличенное изображение">
+				<button class="lightbox-nav next" id="next-btn" onclick="nextImage()" title="Следующее">›</button>
+			</div>
+
+			<div class="lightbox-thumbnails" id="thumbnails-container"></div>
+
+			<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+		</div>
+	</div>
+
+	<script>
+		let currentLightboxImages = [];
+		let currentImageIndex = 0;
+		let currentZoom = 1;
+
+		function openLightbox(clickedImg) {
+			// Найти родительский контейнер коллажа
+			let container = clickedImg.closest('.collage-1') || clickedImg.closest('.collage:not(.collage-1)');
+
+			if (container) {
+				// Собрать все изображения из этого контейнера
+				let images = Array.from(container.querySelectorAll('img'));
+				currentLightboxImages = images.map(img => img.src);
+				currentImageIndex = images.indexOf(clickedImg);
+			} else {
+				// Если нет контейнера, просто показываем это изображение
+				currentLightboxImages = [clickedImg.src];
+				currentImageIndex = 0;
+			}
+
+			currentZoom = 1;
+			showLightboxImage();
+			renderThumbnails();
+			document.getElementById('lightbox').classList.add('active');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeLightbox() {
+			document.getElementById('lightbox').classList.remove('active');
+			document.body.style.overflow = 'auto';
+		}
+
+		function renderThumbnails() {
+			const container = document.getElementById('thumbnails-container');
+			container.innerHTML = '';
+
+			currentLightboxImages.forEach((src, index) => {
+				const thumb = document.createElement('div');
+				thumb.className = 'lightbox-thumbnail' + (index === currentImageIndex ? ' active' : '');
+				thumb.style.backgroundImage = `url('${src}')`;
+				thumb.onclick = () => goToImage(index);
+				container.appendChild(thumb);
+			});
+		}
+
+		function goToImage(index) {
+			currentImageIndex = index;
+			currentZoom = 1;
+			showLightboxImage();
+			renderThumbnails();
+		}
+
+		function showLightboxImage() {
+			const img = document.getElementById('lightbox-image');
+			img.src = currentLightboxImages[currentImageIndex];
+			img.style.transform = `scale(${currentZoom})`;
+
+			document.getElementById('image-counter').textContent =
+				(currentImageIndex + 1) + ' / ' + currentLightboxImages.length;
+
+			document.getElementById('prev-btn').disabled = currentImageIndex === 0;
+			document.getElementById('next-btn').disabled = currentImageIndex === currentLightboxImages.length - 1;
+		}
+
+		function nextImage() {
+			if (currentImageIndex < currentLightboxImages.length - 1) {
+				goToImage(currentImageIndex + 1);
+			}
+		}
+
+		function prevImage() {
+			if (currentImageIndex > 0) {
+				goToImage(currentImageIndex - 1);
+			}
+		}
+
+		function zoomIn() {
+			if (currentZoom < 3) {
+				currentZoom += 0.5;
+				document.getElementById('lightbox-image').style.transform = `scale(${currentZoom})`;
+			}
+		}
+
+		function zoomOut() {
+			if (currentZoom > 1) {
+				currentZoom -= 0.5;
+				if (currentZoom < 1) currentZoom = 1;
+				document.getElementById('lightbox-image').style.transform = `scale(${currentZoom})`;
+			}
+		}
+
+		// Добавить обработчики кликов на все изображения в коллажах
+		document.addEventListener('DOMContentLoaded', function() {
+			const collageImages = document.querySelectorAll('.collage img');
+			collageImages.forEach(img => {
+				img.style.cursor = 'pointer';
+				img.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					openLightbox(this);
+				});
+			});
+
+			// Закрывать лайтбокс при клике на фон
+			document.getElementById('lightbox').addEventListener('click', function(e) {
+				if (e.target === this) {
+					closeLightbox();
+				}
+			});
+
+			// Закрывать при нажатии на Escape
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') {
+					closeLightbox();
+				}
+			});
+
+			// Навигация со стрелками
+			document.addEventListener('keydown', function(e) {
+				if (!document.getElementById('lightbox').classList.contains('active')) return;
+				if (e.key === 'ArrowRight') nextImage();
+				if (e.key === 'ArrowLeft') prevImage();
+				if (e.key === '+' || e.key === '=') zoomIn();
+				if (e.key === '-') zoomOut();
+			});
+		});
+
+		function updateVisitorCount() {
+			let count = localStorage.getItem('visitorCount') || 0;
+			count = parseInt(count) + 1;
+			localStorage.setItem('visitorCount', count);
+			document.getElementById('visitor-count').textContent = count;
+		}
+		updateVisitorCount();
+	</script>
 </body>
 
 </html>

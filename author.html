@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Главная страница онлайн-музея</title>
+	<title>Об авторе сайта</title>
 	<link href="./styles.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -21,22 +21,37 @@
 			<button class="chap_button" onclick="location.href='./feat.html'">Полётный планшет</button>
 			<button class="chap_button" onclick="location.href='./author.html'">Об авторе</button>
 		</div>
-		<div class="image_container">
-			<figure>
-				<img src="./images/main_photo.jpg" alt="Фото Андрея Завитухина">
-			</figure>
-		</div>
+
+		<div class="head2">Об авторе сайта</div>
+
 		<div class="main_text">
-			<p>Андрей Анатольевич Завитухин (22 июня 1962 — 31 января 2000) — военный пилот вертолёта, майор, Герой Российской Федерации.</p>
+			<p><strong>Имя автора:</strong> [ваше имя и фамилия]</p>
+
+			<p><strong>Кафедра:</strong> <a href="#">[ссылка на сайт кафедры]</a></p>
+
+			<p><strong>Контакты для связи:</strong></p>
+			<p>
+				📧 Email: [ваш email]<br>
+				💬 Telegram: [ссылка на Telegram]<br>
+				💬 WhatsApp: [ссылка на WhatsApp]<br>
+				📱 Другие контакты: [если необходимо]
+			</p>
+
+			<p><strong>Информация об университете:</strong> <a href="#">[ссылка на сайт университета]</a></p>
+
+			<p><strong>Информация об институте:</strong> <a href="#">[ссылка на сайт института]</a></p>
 		</div>
+
 		<div class="page-navigation">
+			<button class="nav-button" onclick="location.href='./feat.html'">← Назад</button>
 			<span></span>
-			<button class="nav-button" onclick="location.href='./bio.html'">Далее →</button>
 		</div>
 	</div>
+
 	<div class="site-footer">
 		<p>Счётчик посещений: <strong id="visitor-count">0</strong> | <a href="./author.html">Об авторе сайта</a></p>
 	</div>
+
 	<script>
 		function updateVisitorCount() {
 			let count = localStorage.getItem('visitorCount') || 0;

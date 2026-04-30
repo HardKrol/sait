@@ -3,14 +3,8 @@
 
 <head>
 	<title>Фотографии</title>
-	<link href="./photo.css" rel="stylesheet" type="text/css">
-	<style>
-		figure {
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
-		}
-	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="./styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -24,23 +18,183 @@
 			<button class="chap_button" onclick="location.href='./herit.html'">Подвиг</button>
 			<button class="chap_button" onclick="location.href='./rewards.html'">Награды</button>
 			<button class="chap_button" onclick="location.href='./feat.html'">Полётный планшет</button>
+			<button class="chap_button" onclick="location.href='./author.html'">Об авторе</button>
 		</div>
 
 		<figure class="image_container">
 			<img src="./images/main_photo.jpg" alt="Андрей Анатольевич Завитухин" />
-			<figcaption> Андрей Анатольевич Завитухин </figcaption>
+			<figcaption>Андрей Анатольевич Завитухин</figcaption>
 		</figure>
 
 		<figure class="image_container">
 			<img src="./images/photo/school1.png" alt="Андрей Завитухин в школе" />
-			<figcaption> Андрей Завитухин в школе с одноклассником Алексеем Шибаевым </figcaption>
+			<figcaption>Андрей Завитухин в школе с одноклассником Алексеем Шибаевым</figcaption>
 		</figure>
 
 		<figure class="image_container">
 			<img src="./images/photo/school2.png" alt="Андрей Завитухин среди однокашников" />
-			<figcaption> Андрей Завитухин среди одногруппников по училищу (верхний ряд, первый слева) </figcaption>
+			<figcaption>Андрей Завитухин среди одногруппников по училищу (верхний ряд, первый слева)</figcaption>
 		</figure>
+
+		<div class="page-navigation">
+			<button class="nav-button" onclick="location.href='./bio.html'">← Назад</button>
+			<button class="nav-button" onclick="location.href='./heli.html'">Далее →</button>
+		</div>
 	</div>
+	<div class="site-footer">
+		<p>Счётчик посещений: <strong id="visitor-count">0</strong> | <a href="./author.html">Об авторе сайта</a></p>
+	</div>
+
+	<!-- Лайтбокс для карусели -->
+	<div id="lightbox" class="lightbox">
+		<div class="lightbox-content">
+			<div class="lightbox-header">
+				<div class="lightbox-counter">
+					<span id="image-counter">1 / 1</span>
+				</div>
+				<div class="lightbox-tools">
+					<button class="lightbox-tool-btn" onclick="zoomIn()" title="Приблизить">🔍</button>
+				</div>
+			</div>
+
+			<div class="lightbox-image-wrapper">
+				<button class="lightbox-nav prev" id="prev-btn" onclick="prevImage()" title="Предыдущее">‹</button>
+				<img id="lightbox-image" class="lightbox-image" src="" alt="Увеличенное изображение">
+				<button class="lightbox-nav next" id="next-btn" onclick="nextImage()" title="Следующее">›</button>
+			</div>
+
+			<div class="lightbox-thumbnails" id="thumbnails-container"></div>
+
+			<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+		</div>
+	</div>
+
+	<script>
+		let currentLightboxImages = [];
+		let currentImageIndex = 0;
+		let currentZoom = 1;
+
+		function openLightbox(clickedImg) {
+			// Собрать все изображения со страницы (image_container)
+			let allImages = Array.from(document.querySelectorAll('.image_container img'));
+			currentLightboxImages = allImages.map(img => img.src);
+			currentImageIndex = allImages.indexOf(clickedImg);
+
+			currentZoom = 1;
+			showLightboxImage();
+			renderThumbnails();
+			document.getElementById('lightbox').classList.add('active');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeLightbox() {
+			document.getElementById('lightbox').classList.remove('active');
+			document.body.style.overflow = 'auto';
+		}
+
+		function renderThumbnails() {
+			const container = document.getElementById('thumbnails-container');
+			container.innerHTML = '';
+
+			currentLightboxImages.forEach((src, index) => {
+				const thumb = document.createElement('div');
+				thumb.className = 'lightbox-thumbnail' + (index === currentImageIndex ? ' active' : '');
+				thumb.style.backgroundImage = `url('${src}')`;
+				thumb.onclick = () => goToImage(index);
+				container.appendChild(thumb);
+			});
+		}
+
+		function goToImage(index) {
+			currentImageIndex = index;
+			currentZoom = 1;
+			showLightboxImage();
+			renderThumbnails();
+		}
+
+		function showLightboxImage() {
+			const img = document.getElementById('lightbox-image');
+			img.src = currentLightboxImages[currentImageIndex];
+			img.style.transform = `scale(${currentZoom})`;
+
+			document.getElementById('image-counter').textContent =
+				(currentImageIndex + 1) + ' / ' + currentLightboxImages.length;
+
+			document.getElementById('prev-btn').disabled = currentImageIndex === 0;
+			document.getElementById('next-btn').disabled = currentImageIndex === currentLightboxImages.length - 1;
+		}
+
+		function nextImage() {
+			if (currentImageIndex < currentLightboxImages.length - 1) {
+				goToImage(currentImageIndex + 1);
+			}
+		}
+
+		function prevImage() {
+			if (currentImageIndex > 0) {
+				goToImage(currentImageIndex - 1);
+			}
+		}
+
+		function zoomIn() {
+			if (currentZoom < 3) {
+				currentZoom += 0.5;
+				document.getElementById('lightbox-image').style.transform = `scale(${currentZoom})`;
+			}
+		}
+
+		function zoomOut() {
+			if (currentZoom > 1) {
+				currentZoom -= 0.5;
+				if (currentZoom < 1) currentZoom = 1;
+				document.getElementById('lightbox-image').style.transform = `scale(${currentZoom})`;
+			}
+		}
+
+		// Добавить обработчики кликов на все изображения
+		document.addEventListener('DOMContentLoaded', function() {
+			const imageContainers = document.querySelectorAll('.image_container img');
+			imageContainers.forEach(img => {
+				img.style.cursor = 'pointer';
+				img.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					openLightbox(this);
+				});
+			});
+
+			// Закрывать лайтбокс при клике на фон
+			document.getElementById('lightbox').addEventListener('click', function(e) {
+				if (e.target === this) {
+					closeLightbox();
+				}
+			});
+
+			// Закрывать при нажатии на Escape
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') {
+					closeLightbox();
+				}
+			});
+
+			// Навигация со стрелками
+			document.addEventListener('keydown', function(e) {
+				if (!document.getElementById('lightbox').classList.contains('active')) return;
+				if (e.key === 'ArrowRight') nextImage();
+				if (e.key === 'ArrowLeft') prevImage();
+				if (e.key === '+' || e.key === '=') zoomIn();
+				if (e.key === '-') zoomOut();
+			});
+		});
+
+		function updateVisitorCount() {
+			let count = localStorage.getItem('visitorCount') || 0;
+			count = parseInt(count) + 1;
+			localStorage.setItem('visitorCount', count);
+			document.getElementById('visitor-count').textContent = count;
+		}
+		updateVisitorCount();
+	</script>
 </body>
 
 </html>
