@@ -10,8 +10,11 @@
 
 <body>
 	<div class="page-wrapper">
-		<div class="heading">Онлайн-музей А. А. Завитухина</div>
-		<div class="chapters">
+		<div class="heading">
+			<button class="burger-btn" id="burger-btn" onclick="toggleMenu()">☰</button>
+			<span>Онлайн-музей А. А. Завитухина</span>
+		</div>
+		<div class="chapters" id="menu">
 			<button class="chap_button" onclick="location.href='./index.html'">Главная</button>
 			<button class="chap_button" onclick="location.href='./bio.html'">Биография</button>
 			<button class="chap_button" onclick="location.href='./photo.html'">Фотографии</button>
@@ -21,30 +24,100 @@
 			<button class="chap_button" onclick="location.href='./feat.html'">Полётный планшет</button>
 			<button class="chap_button" onclick="location.href='./author.html'">Об авторе</button>
 		</div>
-		<div class="image_container">
+		<div class="index-image-container">
 			<figure>
 				<img src="./images/main_photo.jpg" alt="Фото Андрея Завитухина">
+				<figcaption>Андрей Анатольевич Завитухин, майор, Герой Российской Федерации</figcaption>
 			</figure>
 		</div>
+		<div class="intro-block">
+			<h2>Добро пожаловать в онлайн-музей</h2>
+			<p>Это мемориальный онлайн-музей, посвящённый Андрею Анатольевичу Завитухину — <strong>Герою Российской Федерации</strong>, майору, военному пилоту вертолёта Ми-24. Здесь вы сможете изучить его биографию, рассмотреть уникальные фотографии, узнать о его подвиге и наградах, а также совершить виртуальный полёт.</p>
+		</div>
 		<div class="main_text">
-			<p>Андрей Анатольевич Завитухин (22 июня 1962 — 31 января 2000) — военный пилот вертолёта, майор, Герой Российской Федерации.</p>
+			<p><strong>Андрей Анатольевич Завитухин</strong><br>
+			22 июня 1962 — 31 января 2000</p>
+			<p>Военный лётчик, майор, командир вертолётного звена. Герой России. Выполнил 187 боевых вылетов. Пример мужества и верности долгу.</p>
+		</div>
+		<div class="sections-preview">
+			<div class="section-card">
+				<h3>📖 Биография</h3>
+				<p>Узнайте историю жизни Андрея Анатольевича Завитухина, майора, командира вертолётного звена</p>
+				<div class="card-action"><a href="./bio.html">Подробнее →</a></div>
+			</div>
+			<div class="section-card">
+				<h3>🖼️ Фотографии</h3>
+				<p>Личные фотографии и архивные материалы из разных периодов жизни</p>
+				<div class="card-action"><a href="./photo.html">Подробнее →</a></div>
+			</div>
+			<div class="section-card">
+				<h3>⭐ Подвиг</h3>
+				<p>История подвига Героя Российской Федерации, его боевые вылеты и верность долгу</p>
+				<div class="card-action"><a href="./herit.html">Подробнее →</a></div>
+			</div>
+			<div class="section-card">
+				<h3>🏆 Награды</h3>
+				<p>Медали, ордена и почести, полученные героем за мужество и отвагу</p>
+				<div class="card-action"><a href="./rewards.html">Подробнее →</a></div>
+			</div>
 		</div>
 		<div class="page-navigation">
 			<span></span>
-			<button class="nav-button" onclick="location.href='./bio.html'">Далее →</button>
+			<button class="nav-button" onclick="location.href='./bio.html'">Начать экскурсию →</button>
 		</div>
 	</div>
 	<div class="site-footer">
 		<p>Счётчик посещений: <strong id="visitor-count">0</strong> | <a href="./author.html">Об авторе сайта</a></p>
 	</div>
 	<script>
-		function updateVisitorCount() {
-			let count = localStorage.getItem('visitorCount') || 0;
-			count = parseInt(count) + 1;
-			localStorage.setItem('visitorCount', count);
-			document.getElementById('visitor-count').textContent = count;
+		function toggleMenu() {
+			const menu = document.getElementById('menu');
+			menu.classList.toggle('hidden');
 		}
+
+		function setActiveMenuButton() {
+			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+			const buttons = document.querySelectorAll('.chap_button');
+			
+			buttons.forEach(button => {
+				button.classList.remove('active');
+				const href = button.getAttribute('onclick').match(/['"](.*?)['"]/);
+				if (href && href[1]) {
+					const pageName = href[1].split('/').pop();
+					if (pageName === currentPage || (currentPage === '' && pageName === 'index.html')) {
+						button.classList.add('active');
+					}
+				}
+			});
+		}
+
+		function closeMenuOnClick() {
+			if (window.innerWidth <= 768) {
+				const menu = document.getElementById('menu');
+				menu.classList.add('hidden');
+			}
+		}
+
+		document.querySelectorAll('.chap_button').forEach(button => {
+			button.addEventListener('click', closeMenuOnClick);
+		});
+
+		function updateVisitorCount() {
+			let hasCountedThisSession = sessionStorage.getItem('hasCountedThisSession');
+			
+			if (!hasCountedThisSession) {
+				let count = localStorage.getItem('visitorCount') || 0;
+				count = parseInt(count) + 1;
+				localStorage.setItem('visitorCount', count);
+				sessionStorage.setItem('hasCountedThisSession', 'true');
+			}
+			
+			document.getElementById('visitor-count').textContent = 
+				localStorage.getItem('visitorCount') || 0;
+		}
+		
 		updateVisitorCount();
+		setActiveMenuButton();
 	</script>
 </body>
 

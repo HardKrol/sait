@@ -10,8 +10,11 @@
 
 <body>
 	<div class="page-wrapper">
-		<div class="heading">Онлайн-музей А. А. Завитухина</div>
-		<div class="chapters">
+		<div class="heading">
+			<button class="burger-btn" id="burger-btn" onclick="toggleMenu()">☰</button>
+			<span>Онлайн-музей А. А. Завитухина</span>
+		</div>
+		<div class="chapters" id="menu">
 			<button class="chap_button" onclick="location.href='./index.html'">Главная</button>
 			<button class="chap_button" onclick="location.href='./bio.html'">Биография</button>
 			<button class="chap_button" onclick="location.href='./photo.html'">Фотографии</button>
@@ -27,7 +30,7 @@
 		<div class="main_text">
 			<p><strong>Имя автора:</strong> Зеленин Антон Алексеевич</p>
 
-			<p><strong>Кафедра:</strong> <a href="https://pm.vogu35.ru/">Кафадра прикладной математики</a></p>
+			<p><strong>Кафедра:</strong> <a href="https://pm.vogu35.ru/">Кафедра прикладной математики</a></p>
 
 			<p><strong>Контакты для связи:</strong></p>
 			<p>
@@ -51,13 +54,54 @@
 	</div>
 
 	<script>
-		function updateVisitorCount() {
-			let count = localStorage.getItem('visitorCount') || 0;
-			count = parseInt(count) + 1;
-			localStorage.setItem('visitorCount', count);
-			document.getElementById('visitor-count').textContent = count;
+		function toggleMenu() {
+			const menu = document.getElementById('menu');
+			menu.classList.toggle('hidden');
 		}
+
+		function setActiveMenuButton() {
+			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+			const buttons = document.querySelectorAll('.chap_button');
+			
+			buttons.forEach(button => {
+				button.classList.remove('active');
+				const href = button.getAttribute('onclick').match(/['"](.*?)['"]/);
+				if (href && href[1]) {
+					const pageName = href[1].split('/').pop();
+					if (pageName === currentPage || (currentPage === '' && pageName === 'index.html')) {
+						button.classList.add('active');
+					}
+				}
+			});
+		}
+
+		function closeMenuOnClick() {
+			if (window.innerWidth <= 768) {
+				const menu = document.getElementById('menu');
+				menu.classList.add('hidden');
+			}
+		}
+
+		document.querySelectorAll('.chap_button').forEach(button => {
+			button.addEventListener('click', closeMenuOnClick);
+		});
+
+		function updateVisitorCount() {
+			let hasCountedThisSession = sessionStorage.getItem('hasCountedThisSession');
+			
+			if (!hasCountedThisSession) {
+				let count = localStorage.getItem('visitorCount') || 0;
+				count = parseInt(count) + 1;
+				localStorage.setItem('visitorCount', count);
+				sessionStorage.setItem('hasCountedThisSession', 'true');
+			}
+			
+			document.getElementById('visitor-count').textContent = 
+				localStorage.getItem('visitorCount') || 0;
+		}
+		
 		updateVisitorCount();
+		setActiveMenuButton();
 	</script>
 </body>
 

@@ -10,8 +10,11 @@
 
 <body>
 	<div class="page-wrapper">
-		<div class="heading">Онлайн-музей А. А. Завитухина</div>
-		<div class="chapters">
+		<div class="heading">
+			<button class="burger-btn" id="burger-btn" onclick="toggleMenu()">☰</button>
+			<span>Онлайн-музей А. А. Завитухина</span>
+		</div>
+		<div class="chapters" id="menu">
 			<button class="chap_button" onclick="location.href='./index.html'">Главная</button>
 			<button class="chap_button" onclick="location.href='./bio.html'">Биография</button>
 			<button class="chap_button" onclick="location.href='./photo.html'">Фотографии</button>
@@ -44,25 +47,33 @@
 		<div class="head3">Грамоты</div>
 		<div class="collage collage-1">
 			<div class="left-large">
-				<a href="./images/bio/gram1.pdf" target="_blank" rel="noopener">
-					<img src="./images/bio/gram1.jpg" alt="Грамота 1">
-				</a>
+				<figure>
+					<a href="./images/bio/gram1.pdf" target="_blank" rel="noopener">
+						<img src="./images/bio/gram1.jpg" alt="Грамота 1: [уточнить название]">
+					</a>
+				</figure>
 			</div>
 			<div class="right-blocks">
 				<div class="block">
-					<a href="./images/bio/gram2.pdf" target="_blank" rel="noopener">
-						<img src="./images/bio/gram2.jpg" alt="Грамота 2">
-					</a>
+					<figure>
+						<a href="./images/bio/gram2.pdf" target="_blank" rel="noopener">
+							<img src="./images/bio/gram2.jpg" alt="Грамота 2: [уточнить название]">
+						</a>
+					</figure>
 				</div>
 				<div class="block">
-					<a href="./images/bio/gram3.pdf" target="_blank" rel="noopener">
-						<img src="./images/bio/gram3.jpg" alt="Грамота 3">
-					</a>
+					<figure>
+						<a href="./images/bio/gram3.pdf" target="_blank" rel="noopener">
+							<img src="./images/bio/gram3.jpg" alt="Грамота 3: [уточнить название]">
+						</a>
+					</figure>
 				</div>
 				<div class="block">
-					<a href="./images/bio/gram4.pdf" target="_blank" rel="noopener">
-						<img src="./images/bio/gram4.jpg" alt="Грамота 4">
-					</a>
+					<figure>
+						<a href="./images/bio/gram4.pdf" target="_blank" rel="noopener">
+							<img src="./images/bio/gram4.jpg" alt="Грамота 4: [уточнить название]">
+						</a>
+					</figure>
 				</div>
 			</div>
 		</div>
@@ -82,31 +93,41 @@
 			<div class="du-blocks">
 				<div class="top-row">
 					<div class="block">
-						<a href="./images/bio/gram5.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram5.jpg" alt="Грамота 5">
-						</a>
+						<figure>
+							<a href="./images/bio/gram5.pdf" target="_blank" rel="noopener">
+								<img src="./images/bio/gram5.jpg" alt="Грамота 5: [уточнить название]">
+							</a>
+						</figure>
 					</div>
 					<div class="block">
-						<a href="./images/bio/gram6.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram6.jpg" alt="Грамота 6">
-						</a>
+						<figure>
+							<a href="./images/bio/gram6.pdf" target="_blank" rel="noopener">
+								<img src="./images/bio/gram6.jpg" alt="Грамота 6: [уточнить название]">
+							</a>
+						</figure>
 					</div>
 					<div class="block">
-						<a href="./images/bio/gram7.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram7.jpg" alt="Грамота 7">
-						</a>
+						<figure>
+							<a href="./images/bio/gram7.pdf" target="_blank" rel="noopener">
+								<img src="./images/bio/gram7.jpg" alt="Грамота 7: [уточнить название]">
+							</a>
+						</figure>
 					</div>
 				</div>
 				<div class="bottom-row">
 					<div class="block">
-						<a href="./images/bio/gram8.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram8.jpg" alt="Грамота 8">
-						</a>
+						<figure>
+							<a href="./images/bio/gram8.pdf" target="_blank" rel="noopener">
+								<img src="./images/bio/gram8.jpg" alt="Грамота 8: [уточнить название]">
+							</a>
+						</figure>
 					</div>
 					<div class="block">
-						<a href="./images/bio/gram9.pdf" target="_blank" rel="noopener">
-							<img src="./images/bio/gram9.jpg" alt="Грамота 9">
-						</a>
+						<figure>
+							<a href="./images/bio/gram9.pdf" target="_blank" rel="noopener">
+								<img src="./images/bio/gram9.jpg" alt="Грамота 9: [уточнить название]">
+							</a>
+						</figure>
 					</div>
 				</div>
 			</div>
@@ -316,13 +337,54 @@
 			});
 		});
 
-		function updateVisitorCount() {
-			let count = localStorage.getItem('visitorCount') || 0;
-			count = parseInt(count) + 1;
-			localStorage.setItem('visitorCount', count);
-			document.getElementById('visitor-count').textContent = count;
+		function toggleMenu() {
+			const menu = document.getElementById('menu');
+			menu.classList.toggle('hidden');
 		}
+
+		function setActiveMenuButton() {
+			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+			const buttons = document.querySelectorAll('.chap_button');
+			
+			buttons.forEach(button => {
+				button.classList.remove('active');
+				const href = button.getAttribute('onclick').match(/['"](.*?)['"]/);
+				if (href && href[1]) {
+					const pageName = href[1].split('/').pop();
+					if (pageName === currentPage || (currentPage === '' && pageName === 'index.html')) {
+						button.classList.add('active');
+					}
+				}
+			});
+		}
+
+		function closeMenuOnClick() {
+			if (window.innerWidth <= 768) {
+				const menu = document.getElementById('menu');
+				menu.classList.add('hidden');
+			}
+		}
+
+		document.querySelectorAll('.chap_button').forEach(button => {
+			button.addEventListener('click', closeMenuOnClick);
+		});
+
+		function updateVisitorCount() {
+			let hasCountedThisSession = sessionStorage.getItem('hasCountedThisSession');
+			
+			if (!hasCountedThisSession) {
+				let count = localStorage.getItem('visitorCount') || 0;
+				count = parseInt(count) + 1;
+				localStorage.setItem('visitorCount', count);
+				sessionStorage.setItem('hasCountedThisSession', 'true');
+			}
+			
+			document.getElementById('visitor-count').textContent = 
+				localStorage.getItem('visitorCount') || 0;
+		}
+		
 		updateVisitorCount();
+		setActiveMenuButton();
 	</script>
 </body>
 
