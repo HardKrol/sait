@@ -2,8 +2,9 @@
 <html lang="ru">
 
 <head>
-	<title>Фотографии</title>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Фотографии</title>
 	<link href="./styles.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -25,20 +26,24 @@
 		</div>
 
 		<div class="photo-gallery">
-			<figure class="image_container">
-				<img src="./images/main_photo.jpg" alt="Андрей Анатольевич Завитухин" />
-				<figcaption>Портрет Андрея Анатольевича Завитухина<br><small>Год: ~1990-е | Источник: [уточнить]</small></figcaption>
-			</figure>
-
-			<figure class="image_container">
-				<img src="./images/photo/school1.png" alt="Андрей Завитухин в школе" />
-				<figcaption>Андрей Завитухин в школе с одноклассником Алексеем Шибаевым<br><small>Год: ~1976-1980 | Школа: [уточнить] | Источник: [уточнить]</small></figcaption>
-			</figure>
-
-			<figure class="image_container">
-				<img src="./images/photo/school2.png" alt="Андрей Завитухин среди однокашников" />
-				<figcaption>Андрей Завитухин среди одногруппников по училищу (верхний ряд, первый слева)<br><small>Год: ~1980 | Учреждение: [уточнить] | Источник: [уточнить]</small></figcaption>
-			</figure>
+			<div class="fade-block">	
+				<figure class="image_container image_container--vertical">
+					<img src="./images/main_photo.jpg" alt="Андрей Анатольевич Завитухин" />
+					<figcaption>Портрет Андрея Анатольевича Завитухина<br><small>Год: ~1990-е | Источник: [уточнить]</small></figcaption>
+				</figure>
+			</div>
+			<div class="fade-block">	
+				<figure class="image_container image_container--horizontal">
+					<img src="./images/photo/school1.png" alt="Андрей Завитухин в школе" />
+					<figcaption>Андрей Завитухин в школе с одноклассником Алексеем Шибаевым<br><small>Год: ~1976-1980 | Школа: [уточнить] | Источник: [уточнить]</small></figcaption>
+				</figure>
+			</div>
+			<div class="fade-block">
+				<figure class="image_container image_container--horizontal">
+					<img src="./images/photo/school2.png" alt="Андрей Завитухин среди однокашников" />
+					<figcaption>Андрей Завитухин среди одногруппников по училищу (верхний ряд, первый слева)<br><small>Год: ~1980 | Учреждение: [уточнить] | Источник: [уточнить]</small></figcaption>
+				</figure>
+			</div>
 		</div>
 
 		<div class="page-navigation">
@@ -47,8 +52,22 @@
 		</div>
 	</div>
 	<div class="site-footer">
-		<p>Счётчик посещений: <strong id="visitor-count">0</strong> | <a href="./author.html">Об авторе сайта</a></p>
+		<p><a href="./author.html">Об авторе сайта</a></p>
 	</div>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+		(function(m,e,t,r,i,k,a){
+			m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			m[i].l=1*new Date();
+			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+			k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+		})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109120057', 'ym');
+
+		ym(109120057, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/109120057" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
 
 	<!-- Лайтбокс для карусели -->
 	<div id="lightbox" class="lightbox">
@@ -224,22 +243,38 @@
 			button.addEventListener('click', closeMenuOnClick);
 		});
 
-		function updateVisitorCount() {
-			let hasCountedThisSession = sessionStorage.getItem('hasCountedThisSession');
-			
-			if (!hasCountedThisSession) {
-				let count = localStorage.getItem('visitorCount') || 0;
-				count = parseInt(count) + 1;
-				localStorage.setItem('visitorCount', count);
-				sessionStorage.setItem('hasCountedThisSession', 'true');
-			}
-			
-			document.getElementById('visitor-count').textContent = 
-				localStorage.getItem('visitorCount') || 0;
-		}
-		
-		updateVisitorCount();
 		setActiveMenuButton();
+
+		// ===== ФУНКЦИЯ ПОЯВЛЕНИЯ И ИСЧЕЗНОВЕНИЯ БЛОКОВ ПРИ СКРОЛЛЕ =====
+		function revealOnScroll() {
+			const blocks = document.querySelectorAll('.fade-block');
+			
+			blocks.forEach(block => {
+				const blockPosition = block.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+				const threshold = 100; // пиксели, на которые нужно прокрутить блок
+				
+				// Если блок попадает в видимую область (с отступом вверх)
+				if (blockPosition.top < windowHeight - threshold && blockPosition.bottom > 0) {
+					block.classList.add('visible');
+					block.classList.remove('hidden');
+				} else if (blockPosition.bottom < 0) {
+					// Блок вышел вверх - исчезает с трансформацией вверх
+					block.classList.add('hidden');
+					block.classList.remove('visible');
+				} else {
+					// Блок внизу - исчезает с трансформацией вниз
+					block.classList.remove('visible');
+					block.classList.remove('hidden');
+				}
+			});
+		}
+
+		// Запуск функции при загрузке страницы
+		window.addEventListener('load', revealOnScroll);
+
+		// Запуск функции при скролле
+		window.addEventListener('scroll', revealOnScroll);
 	</script>
 </body>
 

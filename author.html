@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<div class="page-wrapper">
+	<div class="page-wrapper author-page">
 		<div class="heading">
 			<button class="burger-btn" id="burger-btn" onclick="toggleMenu()">☰</button>
 			<span>Онлайн-музей А. А. Завитухина</span>
@@ -50,8 +50,22 @@
 	</div>
 
 	<div class="site-footer">
-		<p>Счётчик посещений: <strong id="visitor-count">0</strong> | <a href="./author.html">Об авторе сайта</a></p>
+		<p><a href="./author.html">Об авторе сайта</a></p>
 	</div>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+		(function(m,e,t,r,i,k,a){
+			m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			m[i].l=1*new Date();
+			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+			k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+		})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109120057', 'ym');
+
+		ym(109120057, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/109120057" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
 
 	<script>
 		function toggleMenu() {
@@ -86,22 +100,38 @@
 			button.addEventListener('click', closeMenuOnClick);
 		});
 
-		function updateVisitorCount() {
-			let hasCountedThisSession = sessionStorage.getItem('hasCountedThisSession');
-			
-			if (!hasCountedThisSession) {
-				let count = localStorage.getItem('visitorCount') || 0;
-				count = parseInt(count) + 1;
-				localStorage.setItem('visitorCount', count);
-				sessionStorage.setItem('hasCountedThisSession', 'true');
-			}
-			
-			document.getElementById('visitor-count').textContent = 
-				localStorage.getItem('visitorCount') || 0;
-		}
-		
-		updateVisitorCount();
 		setActiveMenuButton();
+
+		// ===== ФУНКЦИЯ ПОЯВЛЕНИЯ И ИСЧЕЗНОВЕНИЯ БЛОКОВ ПРИ СКРОЛЛЕ =====
+		function revealOnScroll() {
+			const blocks = document.querySelectorAll('.fade-block');
+			
+			blocks.forEach(block => {
+				const blockPosition = block.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+				const threshold = 100; // пиксели, на которые нужно прокрутить блок
+				
+				// Если блок попадает в видимую область (с отступом вверх)
+				if (blockPosition.top < windowHeight - threshold && blockPosition.bottom > 0) {
+					block.classList.add('visible');
+					block.classList.remove('hidden');
+				} else if (blockPosition.bottom < 0) {
+					// Блок вышел вверх - исчезает с трансформацией вверх
+					block.classList.add('hidden');
+					block.classList.remove('visible');
+				} else {
+					// Блок внизу - исчезает с трансформацией вниз
+					block.classList.remove('visible');
+					block.classList.remove('hidden');
+				}
+			});
+		}
+
+		// Запуск функции при загрузке страницы
+		window.addEventListener('load', revealOnScroll);
+
+		// Запуск функции при скролле
+		window.addEventListener('scroll', revealOnScroll);
 	</script>
 </body>
 

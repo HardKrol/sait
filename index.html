@@ -24,44 +24,48 @@
 			<button class="chap_button" onclick="location.href='./feat.html'">Полётный планшет</button>
 			<button class="chap_button" onclick="location.href='./author.html'">Об авторе</button>
 		</div>
-		<div class="index-image-container">
-			<figure>
-				<img src="./images/main_photo.jpg" alt="Фото Андрея Завитухина">
-				<figcaption>Андрей Анатольевич Завитухин, майор, Герой Российской Федерации</figcaption>
-			</figure>
-		</div>
-		<div class="intro-block">
-			<h2>Добро пожаловать в онлайн-музей</h2>
-			<p>Это мемориальный онлайн-музей, посвящённый Андрею Анатольевичу Завитухину — <strong>Герою Российской Федерации</strong>, майору, военному пилоту вертолёта Ми-24. Здесь вы сможете изучить его биографию, рассмотреть уникальные фотографии, узнать о его подвиге и наградах, а также совершить виртуальный полёт.</p>
-		</div>
-		<div class="main_text">
-			<p><strong>Андрей Анатольевич Завитухин</strong><br>
-			22 июня 1962 — 31 января 2000</p>
-			<p>Военный лётчик, майор, командир вертолётного звена. Герой России. Выполнил 187 боевых вылетов. Пример мужества и верности долгу.</p>
-		</div>
-		<div class="sections-preview">
-			<div class="section-card">
-				<h3>📖 Биография</h3>
-				<p>Узнайте историю жизни Андрея Анатольевича Завитухина, майора, командира вертолётного звена</p>
-				<div class="card-action"><a href="./bio.html">Подробнее →</a></div>
-			</div>
-			<div class="section-card">
-				<h3>🖼️ Фотографии</h3>
-				<p>Личные фотографии и архивные материалы из разных периодов жизни</p>
-				<div class="card-action"><a href="./photo.html">Подробнее →</a></div>
-			</div>
-			<div class="section-card">
-				<h3>⭐ Подвиг</h3>
-				<p>История подвига Героя Российской Федерации, его боевые вылеты и верность долгу</p>
-				<div class="card-action"><a href="./herit.html">Подробнее →</a></div>
-			</div>
-			<div class="section-card">
-				<h3>🏆 Награды</h3>
-				<p>Медали, ордена и почести, полученные героем за мужество и отвагу</p>
-				<div class="card-action"><a href="./rewards.html">Подробнее →</a></div>
+		<div class="fade-block">
+			<div class="index-image-container">
+				<figure>
+					<img src="./images/main_photo.jpg" alt="Фото Андрея Завитухина">
+					<figcaption>Андрей Анатольевич Завитухин, майор, Герой Российской Федерации</figcaption>
+				</figure>
 			</div>
 		</div>
-		<div class="page-navigation">
+		<div class="fade-block">
+			<div class="intro-block">
+				<h2>Добро пожаловать в онлайн-музей</h2>
+				<p>Это мемориальный онлайн-музей, посвящённый Андрею Анатольевичу Завитухину — <strong>Герою Российской Федерации</strong>, майору, военному пилоту вертолёта Ми-24. Здесь вы сможете изучить его биографию, рассмотреть уникальные фотографии, узнать о его подвиге и наградах, а также совершить виртуальный полёт.</p>
+			</div>
+			<div class="main_text">
+				<p><strong>Андрей Анатольевич Завитухин</strong><br>
+				22 июня 1962 — 31 января 2000</p>
+				<p>Военный лётчик, майор, командир вертолётного звена. Герой России. Выполнил 187 боевых вылетов. Пример мужества и верности долгу.</p>
+			</div>
+			<div class="sections-preview">
+				<div class="section-card">
+					<h3>📖 Биография</h3>
+					<p>Узнайте историю жизни Андрея Анатольевича Завитухина, майора, командира вертолётного звена</p>
+					<div class="card-action"><a href="./bio.html">Подробнее →</a></div>
+				</div>
+				<div class="section-card">
+					<h3>🖼️ Фотографии</h3>
+					<p>Личные фотографии и архивные материалы из разных периодов жизни</p>
+					<div class="card-action"><a href="./photo.html">Подробнее →</a></div>
+				</div>
+				<div class="section-card">
+					<h3>⭐ Подвиг</h3>
+					<p>История подвига Героя Российской Федерации, его боевые вылеты и верность долгу</p>
+					<div class="card-action"><a href="./herit.html">Подробнее →</a></div>
+				</div>
+				<div class="section-card">
+					<h3>🏆 Награды</h3>
+					<p>Медали, ордена и почести, полученные героем за мужество и отвагу</p>
+					<div class="card-action"><a href="./rewards.html">Подробнее →</a></div>
+				</div>
+			</div>
+		</div>
+			<div class="page-navigation">
 			<span></span>
 			<button class="nav-button" onclick="location.href='./bio.html'">Начать экскурсию →</button>
 		</div>
@@ -98,26 +102,42 @@
 			}
 		}
 
+		// ===== ФУНКЦИЯ ПОЯВЛЕНИЯ И ИСЧЕЗНОВЕНИЯ БЛОКОВ ПРИ СКРОЛЛЕ =====
+		function revealOnScroll() {
+			const blocks = document.querySelectorAll('.fade-block');
+			
+			blocks.forEach(block => {
+				const blockPosition = block.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+				const threshold = 100; // пиксели, на которые нужно прокрутить блок
+				
+				// Если блок попадает в видимую область (с отступом вверх)
+				if (blockPosition.top < windowHeight - threshold && blockPosition.bottom > 0) {
+					block.classList.add('visible');
+					block.classList.remove('hidden');
+				} else if (blockPosition.bottom < 0) {
+					// Блок вышел вверх - исчезает с трансформацией вверх
+					block.classList.add('hidden');
+					block.classList.remove('visible');
+				} else {
+					// Блок внизу - исчезает с трансформацией вниз
+					block.classList.remove('visible');
+					block.classList.remove('hidden');
+				}
+			});
+		}
+
 		document.querySelectorAll('.chap_button').forEach(button => {
 			button.addEventListener('click', closeMenuOnClick);
 		});
 
-		function updateVisitorCount() {
-			let hasCountedThisSession = sessionStorage.getItem('hasCountedThisSession');
-			
-			if (!hasCountedThisSession) {
-				let count = localStorage.getItem('visitorCount') || 0;
-				count = parseInt(count) + 1;
-				localStorage.setItem('visitorCount', count);
-				sessionStorage.setItem('hasCountedThisSession', 'true');
-			}
-			
-			document.getElementById('visitor-count').textContent = 
-				localStorage.getItem('visitorCount') || 0;
-		}
-		
-		updateVisitorCount();
 		setActiveMenuButton();
+
+		// Запуск функции при загрузке страницы
+		window.addEventListener('load', revealOnScroll);
+
+		// Запуск функции при скролле
+		window.addEventListener('scroll', revealOnScroll);
 	</script>
 </body>
 
