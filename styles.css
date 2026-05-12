@@ -356,6 +356,7 @@ a:active {
 
 .image_container img {
 	max-width: 100%;
+	width: 100%;
 	max-height: 90vh !important;
 	border-radius: 8px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
@@ -592,26 +593,24 @@ figure.image_container figcaption {
 /* ===== СТИЛИ ДЛЯ ВЕРТИКАЛЬНЫХ И ГОРИЗОНТАЛЬНЫХ ИЗОБРАЖЕНИЙ ===== */
 /* Вертикальные изображения (портреты) */
 figure.image_container--vertical {
-	max-width: 800px !important;
+	max-width: 420px !important;
 	margin: 0 auto 30px;
 }
 
 figure.image_container--vertical img {
-	max-height: 85vh !important;
-	aspect-ratio: 3 / 4 !important;
+	max-height: 65vh !important;
 	object-fit: contain !important;
 	height: auto !important;
 }
 
 /* Горизонтальные изображения */
 figure.image_container--horizontal {
-	max-width: 1000px !important;
+	max-width: 800px !important;
 	margin: 0 auto 30px;
 }
 
 figure.image_container--horizontal img {
 	max-height: 75vh !important;
-	aspect-ratio: 16 / 9 !important;
 	object-fit: contain !important;
 	height: auto !important;
 }

@@ -29,19 +29,19 @@
 			<div class="fade-block">	
 				<figure class="image_container image_container--vertical">
 					<img src="./images/main_photo.jpg" alt="Андрей Анатольевич Завитухин" />
-					<figcaption>Портрет Андрея Анатольевича Завитухина<br><small>Год: ~1990-е | Источник: [уточнить]</small></figcaption>
+					<figcaption>Портрет Андрея Анатольевича Завитухина<br><small>Год: ~1990-е </small></figcaption>
 				</figure>
 			</div>
 			<div class="fade-block">	
 				<figure class="image_container image_container--horizontal">
 					<img src="./images/photo/school1.png" alt="Андрей Завитухин в школе" />
-					<figcaption>Андрей Завитухин в школе с одноклассником Алексеем Шибаевым<br><small>Год: ~1976-1980 | Школа: [уточнить] | Источник: [уточнить]</small></figcaption>
+					<figcaption>Андрей Завитухин в школе с одноклассником Алексеем Шибаевым<br><small>Год: ~1976-1980 | Школа: средняя школа № 13, Вологда </small></figcaption>
 				</figure>
 			</div>
 			<div class="fade-block">
 				<figure class="image_container image_container--horizontal">
 					<img src="./images/photo/school2.png" alt="Андрей Завитухин среди однокашников" />
-					<figcaption>Андрей Завитухин среди одногруппников по училищу (верхний ряд, первый слева)<br><small>Год: ~1980 | Учреждение: [уточнить] | Источник: [уточнить]</small></figcaption>
+					<figcaption>Андрей Завитухин среди одногруппников по училищу (верхний ряд, первый слева)<br><small>Год: ~1980 | Учреждение: Саратовское высшее военное авиационное училище лётчиков </small></figcaption>
 				</figure>
 			</div>
 		</div>
@@ -273,8 +273,33 @@
 		// Запуск функции при загрузке страницы
 		window.addEventListener('load', revealOnScroll);
 
-		// Запуск функции при скролле
-		window.addEventListener('scroll', revealOnScroll);
+		document.addEventListener('DOMContentLoaded', () => {
+			const blocks = document.querySelectorAll('.fade-block');
+
+			const observerOptions = {
+				threshold: 0.15, // Блок считается видимым, когда показано 15% его площади
+				rootMargin: '0px 0px -50px 0px' // Срабатывает чуть раньше, чем блок коснется края
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						entry.target.classList.remove('hidden');
+					} else {
+						// Если нужно, чтобы блоки снова исчезали, когда уходят вниз
+						if (entry.boundingClientRect.top > 0) {
+							entry.target.classList.remove('visible');
+						} else {
+							// Если блок ушел вверх, добавляем класс hidden для эффекта ухода вверх
+							entry.target.classList.add('hidden');
+						}
+					}
+				});
+			}, observerOptions);
+
+			blocks.forEach(block => observer.observe(block));
+		});
 	</script>
 </body>
 
